@@ -1,0 +1,22 @@
+/* Tambahan Ruangsport di atas template Stamina */
+.page-hero { background: #1d2b2a; color: #fff; padding: 9rem 0 4rem; text-align: center; }
+.page-hero h1 { color: #fff; font-weight: 900; margin-bottom: .75rem; }
+.page-hero .lead { color: rgba(255,255,255,.8); }
+.card-block { background: #fff; border: 1px solid #e6e9e8; border-radius: 6px; padding: 1.5rem; }
+.auth-card { background: #fff; border: 1px solid #e6e9e8; border-radius: 6px; padding: 2rem; }
+.member-chip { padding: .5rem .8rem; margin: 0 .4rem .4rem 0; font-size: .9rem; }
+.stat-number { font-size: 2.2rem; font-weight: 900; line-height: 1.1; }
+.comment-item { border-top: 1px solid #eef0ef; padding: .5rem 0; font-size: .95rem; }
+.filter-form .form-control { height: calc(2.6rem + 2px); }
+.site-footer { background: #f5f7f6; border-top: 1px solid #e6e9e8; }
+.nav-pills .nav-link.active { background: #1d2b2a; }
+
+/* Bracket */
+.bracket { display: flex; overflow-x: auto; padding-bottom: 1rem; }
+.bracket-round { min-width: 230px; margin-right: 1.5rem; display: flex; flex-direction: column; justify-content: space-around; }
+.bracket-title { text-align: center; margin-bottom: 1rem; }
+.bracket-match { border: 1px solid #d9dedc; border-radius: 4px; margin-bottom: 1rem; background: #fff; }
+.bracket-slot { display: flex; justify-content: space-between; padding: .45rem .7rem; }
+.bracket-slot + .bracket-slot { border-top: 1px solid #eef0ef; }
+.bracket-slot.winner { background: #e8f6ee; font-weight: 700; }
+.bracket-meta { font-size: .78rem; color: #6c757d; padding: .3rem .7rem; border-top: 1px dashed #d9dedc; }
