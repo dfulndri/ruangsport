@@ -6,11 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Club;
 use App\Models\Competition;
+use App\Models\Sport;
+use App\Models\User;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $stats = [
+            'users' => User::where('is_active', true)->count(),
+            'clubs' => Club::count(),
+            'activities' => Activity::where('status', '!=', 'draft')->count(),
+            'competitions' => Competition::where('status', '!=', 'draft')->count(),
+        ];
+
+        $sports = Sport::orderBy('name')->get();
+
         $activities = Activity::with('sport')
             ->where('status', 'open')
             ->where('starts_at', '>=', now())
@@ -32,6 +43,6 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        return view('home', compact('activities', 'clubs', 'competitions'));
+        return view('home', compact('stats', 'sports', 'activities', 'clubs', 'competitions'));
     }
 }

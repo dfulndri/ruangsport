@@ -10,7 +10,7 @@
         <a href="{{ route('activities.index') }}" class="mr-3">Aktivitas</a>
         <a href="{{ route('competitions.index') }}" class="mr-3">Kompetisi</a>
         <a href="{{ route('venues.index') }}">Venue</a>
-        <p class="small text-muted mt-3 mb-0">&copy; {{ date('Y') }} Ruangsport. Template dasar: Stamina by Free-Template.co</p>
+        <p class="small text-muted mt-3 mb-0">&copy; {{ date('Y') }} Ruangsport. </p>
       </div>
     </div>
   </div>

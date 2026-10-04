@@ -1,18 +1,79 @@
 /* Tambahan Ruangsport di atas template Stamina */
-.page-hero { background: #1d2b2a; color: #fff; padding: 9rem 0 4rem; text-align: center; }
-.page-hero h1 { color: #fff; font-weight: 900; margin-bottom: .75rem; }
-.page-hero .lead { color: rgba(255,255,255,.8); }
-.card-block { background: #fff; border: 1px solid #e6e9e8; border-radius: 6px; padding: 1.5rem; }
-.auth-card { background: #fff; border: 1px solid #e6e9e8; border-radius: 6px; padding: 2rem; }
+:root { --rs-dark: #1d2b2a; --rs-accent: #f23a2e; --rs-line: #e6e9e8; --rs-soft: #f5f7f6; }
+
+img { max-width: 100%; }
+a:focus-visible, button:focus-visible, .btn:focus-visible, .form-control:focus-visible {
+  outline: 3px solid var(--rs-accent); outline-offset: 2px;
+}
+
+/* ---------- Hero dengan foto ---------- */
+.page-hero { position: relative; overflow: hidden; isolation: isolate; color: #fff; text-align: center; padding: 9rem 0 4.5rem; background: var(--rs-dark); }
+.page-hero__bg { position: absolute; inset: -6% 0; z-index: -2; background: var(--rs-dark) center / cover no-repeat; will-change: transform; }
+.page-hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(16,26,25,.78) 0%, rgba(16,26,25,.55) 55%, rgba(16,26,25,.82) 100%); }
+.page-hero h1 { color: #fff; font-weight: 900; font-size: clamp(1.9rem, 4.6vw, 3.3rem); line-height: 1.15; margin-bottom: .9rem; }
+.page-hero .lead { color: rgba(255,255,255,.85); max-width: 640px; margin: 0 auto; }
+.page-hero--home { padding: 11rem 0 9rem; }
+.page-hero--home h1 { font-size: clamp(2.2rem, 6vw, 4rem); max-width: 880px; margin-left: auto; margin-right: auto; }
+.hero-actions { margin-top: 2rem; }
+.hero-actions .btn { margin: 0 .35rem .6rem; }
+.hero-actions .btn-outline-light { border-width: 2px; }
+
+/* Animasi masuk hero: satu rangkaian saat halaman dibuka */
+@keyframes rs-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.page-hero__inner > * { animation: rs-rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.page-hero__inner > :nth-child(2) { animation-delay: .12s; }
+.page-hero__inner > :nth-child(3) { animation-delay: .24s; }
+
+/* ---------- Reveal saat scroll ---------- */
+.js .rs-reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); transition-delay: var(--rs-delay, 0ms); }
+.js .rs-reveal.is-visible { opacity: 1; transform: none; }
+
+/* Progress scroll & tombol ke atas */
+#scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 2000; background: var(--rs-accent); transform: scaleX(0); transform-origin: 0 50%; }
+#back-to-top { position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 1500; width: 46px; height: 46px; border: 0; border-radius: 50%;
+  background: var(--rs-dark); color: #fff; font-size: 1.3rem; line-height: 1; opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity .25s, transform .25s, background .2s; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+#back-to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+#back-to-top:hover { background: var(--rs-accent); }
+
+/* ---------- Komponen ---------- */
+.site-section { padding: 4.5rem 0; }
+.rs-section { padding: 4.5rem 0; }
+.rs-section--alt { background: var(--rs-soft); }
+.rs-section .section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.75rem; }
+.rs-section .section-head h3 { margin: 0; font-weight: 900; }
+
+.card-block { background: #fff; border: 1px solid var(--rs-line); border-radius: 6px; padding: 1.5rem; transition: transform .25s ease, box-shadow .25s ease; }
+.card-block:has(h5 > a):hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(16,26,25,.12); }
+.card-block img { width: 100%; height: auto; border-radius: 4px; }
+.auth-card { background: #fff; border: 1px solid var(--rs-line); border-radius: 6px; padding: 2rem; }
 .member-chip { padding: .5rem .8rem; margin: 0 .4rem .4rem 0; font-size: .9rem; }
-.stat-number { font-size: 2.2rem; font-weight: 900; line-height: 1.1; }
 .comment-item { border-top: 1px solid #eef0ef; padding: .5rem 0; font-size: .95rem; }
 .filter-form .form-control { height: calc(2.6rem + 2px); }
-.site-footer { background: #f5f7f6; border-top: 1px solid #e6e9e8; }
-.nav-pills .nav-link.active { background: #1d2b2a; }
+.site-footer { background: var(--rs-soft); border-top: 1px solid var(--rs-line); }
+.nav-pills .nav-link.active { background: var(--rs-dark); }
+
+/* Statistik yang menimpa bagian bawah hero */
+.stats-strip { position: relative; z-index: 2; margin-top: -4.5rem; }
+.stats-card { background: #fff; border-radius: 8px; padding: 1.75rem 1rem 1rem; box-shadow: 0 16px 44px rgba(16,26,25,.16); }
+.stat-item { margin-bottom: 1rem; }
+.stat-number { font-size: 2.2rem; font-weight: 900; line-height: 1.1; color: var(--rs-dark); }
+
+/* Chip olahraga */
+.sport-chip { display: inline-block; padding: .55rem 1.1rem; margin: 0 .5rem .65rem 0; border: 1px solid #d3d9d7; border-radius: 999px; background: #fff; color: var(--rs-dark); }
+.sport-chip:hover { background: var(--rs-dark); border-color: var(--rs-dark); color: #fff; text-decoration: none; }
+
+/* Cara kerja */
+.step-number { width: 44px; height: 44px; border-radius: 50%; background: var(--rs-dark); color: #fff; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+
+/* Ajakan untuk pemilik venue */
+.cta-band { background: var(--rs-dark); color: #fff; padding: 4rem 0; text-align: center; }
+.cta-band h3 { color: #fff; font-weight: 900; }
+.cta-band p { color: rgba(255,255,255,.8); max-width: 560px; margin: 0 auto 1.5rem; }
 
 /* Bracket */
-.bracket { display: flex; overflow-x: auto; padding-bottom: 1rem; }
+.bracket { display: flex; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
 .bracket-round { min-width: 230px; margin-right: 1.5rem; display: flex; flex-direction: column; justify-content: space-around; }
 .bracket-title { text-align: center; margin-bottom: 1rem; }
 .bracket-match { border: 1px solid #d9dedc; border-radius: 4px; margin-bottom: 1rem; background: #fff; }
@@ -20,3 +81,29 @@
 .bracket-slot + .bracket-slot { border-top: 1px solid #eef0ef; }
 .bracket-slot.winner { background: #e8f6ee; font-weight: 700; }
 .bracket-meta { font-size: .78rem; color: #6c757d; padding: .3rem .7rem; border-top: 1px dashed #d9dedc; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 991.98px) {
+  .page-hero--home { padding: 9rem 0 8rem; }
+}
+@media (max-width: 767.98px) {
+  .page-hero { padding: 6.5rem 0 3rem; }
+  .page-hero--home { padding: 7.5rem 0 6.5rem; }
+  .hero-actions .btn { display: block; width: 100%; margin: 0 0 .7rem; }
+  .site-section, .rs-section { padding: 3rem 0; }
+  .stats-strip { margin-top: -3rem; }
+  .stat-number { font-size: 1.75rem; }
+  .card-block, .auth-card { padding: 1.1rem; }
+  .rs-section .section-head { flex-direction: column; align-items: flex-start; }
+  .cta-band { padding: 3rem 0; }
+  .bracket-round { min-width: 200px; margin-right: 1rem; }
+  #back-to-top { right: .75rem; bottom: .75rem; }
+}
+
+/* Hormati pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__inner > * { animation: none; }
+  .js .rs-reveal { opacity: 1; transform: none; transition: none; }
+  .card-block, #back-to-top { transition: none; }
+  .card-block:has(h5 > a):hover { transform: none; }
+}
